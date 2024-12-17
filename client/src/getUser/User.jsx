@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 
 export const User = () => {
+
+    const [users, setUsers] = useState([]);
+
+    useEffect(()=>{
+        const fechtData =  async ()=>{
+            
+            try {
+
+                const response = await axios.get("http://localhost:8000/api/user");
+                setUsers(response.data);
+                
+            } catch (error) {
+                console.log("Erro ao carregar os dados", error);
+                
+            }
+        };
+        fechtData();
+    }, []);  
+
   return (
     <div className='container'>
 
@@ -20,20 +40,27 @@ export const User = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>    
-                    <div className='d-flex justify-content-center gap-2'>
-                        <div>
-                        <button className='btn btn-warning'><i class="bi bi-pencil-square"></i></button></div>
-                        <div>
-                        <button className='btn btn-danger'><i class="bi bi-trash3-fill"></i></button></div>
-                    </div>
-                    </td>
-                    </tr>                    
+                     { users.map((user, index) => {
+                        return (
+
+                            <tr key={user.id}>
+                            <th scope="row">{index +1}</th>
+                            <td>{user.name}</td>
+                            <td>{user.email}</td>
+                            <td>{user.address}</td>
+                            <td>    
+                            <div className='d-flex justify-content-center gap-2'>
+                                <div>
+                                <button className='btn btn-warning'><i class="bi bi-pencil-square"></i></button></div>
+                                <div>
+                                <button className='btn btn-danger'><i class="bi bi-trash3-fill"></i></button></div>
+                            </div>
+                            </td>
+                            </tr>     
+
+                        )
+                    })}
+                                  
                 </tbody>
             </table>
         </div>

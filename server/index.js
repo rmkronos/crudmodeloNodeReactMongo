@@ -3,11 +3,13 @@ const bodyParser = require("body-parser");
 const dontenv  = require("dotenv");
 const mongoose = require("mongoose");
 const route = require('./routes/userRoute');
+const cors =  require('cors');
 
 
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cors());
 
 dontenv.config();
 

@@ -38,9 +38,7 @@ const index = async (req, res) =>{
             })
         }
 
-        res.status(200).json({
-            message: userData
-        })
+        res.status(200).json(userData)
         
     } catch (error) {
         res.status(500).json({
