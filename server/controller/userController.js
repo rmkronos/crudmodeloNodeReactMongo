@@ -100,9 +100,40 @@ const update = async (req, res) => {
 
 }
 
+
+const excluir = async (req, res) => {
+
+    try {
+
+        const id = req.params.id;
+        const userExist = await User.findById(id);
+        if(!userExist){
+            res.status(404).json({
+                message: `Não foi encontrado nenhum usuario com esse ${id}`
+            })
+        }
+
+       const deleteUser = await User.findByIdAndDelete(id);
+
+        res.status(200).json({
+            message: `Usuário com id ${id} foi exluído com sucesso!`
+        });
+
+        
+    } catch (error) {
+        res.status(500).json({
+            erro: true,
+            message: error.message,
+        });
+    }
+
+
+}
+
 module.exports = {
     create,
     index,
     getUserById,
-    update
+    update,
+    excluir
 }
