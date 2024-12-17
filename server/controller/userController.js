@@ -69,11 +69,40 @@ const getUserById = async (req, res) =>{
             message: error.message,
         });
     }
+}
+
+const update = async (req, res) => {
+
+    try {
+
+        const id = req.params.id;
+        const userExist = await User.findById(id);
+        if(!userExist){
+            res.status(404).json({
+                message: `Não foi encontrado nenhum usuario com esse ${id}`
+            })
+        }
+
+       const updateData = await User.findByIdAndUpdate(id, req.body, {
+            new : true,
+        });
+
+        res.status(200).json( updateData );
+
+        
+    } catch (error) {
+        res.status(500).json({
+            erro: true,
+            message: error.message,
+        });
+    }
+
 
 }
 
 module.exports = {
     create,
     index,
-    getUserById
+    getUserById,
+    update
 }
