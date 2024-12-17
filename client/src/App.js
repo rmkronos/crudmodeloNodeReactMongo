@@ -1,6 +1,6 @@
 import './App.css';
 import { User } from './getUser/User';
-import { addUser } from './addUser/addUser';
+import { AddUser } from './AddUser/AddUser';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
@@ -14,7 +14,7 @@ function App() {
      element: <User />
   },
   {  path:"/add-user",
-     element: <addUser />
+     element: <AddUser />
   }
   
   ]);
