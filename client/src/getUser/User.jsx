@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export const User = () => {
 
@@ -27,8 +28,10 @@ export const User = () => {
         <div className="card shadow-lg p-3 mb-5 bg-body-tertiary rounded">
         <div className="card-header">Lista de Usuários</div>
         <div className="card-title">Usuários</div>
-        <div className="card-body">
-            <div className='mb-3 d-flex jus'><button type="button" className='btn btn-primary'><i class="bi bi-person-plus-fill"></i> Novo Usuário </button></div>
+
+        <div className='mb-3 d-flex justify-content-end'><Link to="/add-user" type="button" className='btn btn-primary'><i class="bi bi-person-plus-fill"></i> Novo Usuário </Link></div>
+
+        <div className="card-body">            
             <table class="table table-striped table-hover table-bordered border-primary">
                 <thead className='table-dark'>
                     <tr>
