@@ -4,6 +4,8 @@ import { AddUser } from './AddUser/AddUser';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
 
 
 
@@ -20,8 +22,10 @@ function App() {
   ]);
 
   return (
-    <div className="App mt-5">      
+    <div className="App">      
+      <Navbar />
       <RouterProvider router={route}></RouterProvider>
+      <Footer />
     </div>
   );
 }
