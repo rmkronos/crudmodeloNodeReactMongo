@@ -1,6 +1,37 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 export const AddUser = () => {
+
+  const users = {
+    name: "",
+    email : "",
+    address: ""
+  }
+
+  const [user, setUser] = useState(users);
+
+  const inputHandler = (e) => {
+     const {name, value} = e.target;
+     console.log(name, value);
+     
+     setUser({...user, [name]: value});
+
+  }
+
+  const submitForm =  async (e) => {
+    e.preventDefault();
+
+    await axios.post('http://localhost:8000/api/user-create', user)
+    .then((response)=>{
+        console.log("Usuario cadastrado com sucesso!");
+    })
+    .catch((error)=>{
+        console.log("Erro: ", error);
+        
+    });
+  }
+
   return (
     <div>
       <div className='container'>
@@ -11,19 +42,19 @@ export const AddUser = () => {
             <Link to='/' type="button" className='btn btn-primary mt-1'><i class="bi bi-arrow-left-circle-fill"></i> Voltar</Link>
           </div>
           <div className="card-body">
-          <form action="">
+          <form action="" onSubmit={submitForm}>
             <div className="form-floating mb-3">
-              <input type="text" className="form-control" name='name' id="name" placeholder="Nome" required/>
+              <input type="text" className="form-control" name='name' id="name" onChange={inputHandler} placeholder="Nome" required/>
               <label htmlFor="name">Nome</label>
             </div>
 
             <div className="form-floating mb-3">
-              <input type="email" className="form-control" name='email' id="email" placeholder="name@example.com" required />
+              <input type="email" className="form-control" name='email' id="email" onChange={inputHandler} placeholder="name@example.com" required />
               <label htmlFor="email">E-mail</label>
             </div>
 
             <div className="form-floating mb-3">
-              <input type="text" className="form-control" id="address" placeholder="Endereço" required/>
+              <input type="text" className="form-control" name='address' id="address" onChange={inputHandler} placeholder="Endereço" required/>
               <label htmlFor="address">Endereço</label>
             </div>
 
